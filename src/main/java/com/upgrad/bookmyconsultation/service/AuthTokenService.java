@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
-
 @Service
 public class AuthTokenService {
 
@@ -32,7 +31,6 @@ public class AuthTokenService {
 
 	@Autowired
 	private UserAuthTokenRepository userAuthDao;
-
 
 	@Transactional(propagation = Propagation.MANDATORY)
 	public UserAuthToken issueToken(final User user) {
@@ -59,7 +57,6 @@ public class AuthTokenService {
 		return authTokenEntity;
 
 	}
-
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void invalidateToken(final String accessToken) throws AuthorizationFailedException {

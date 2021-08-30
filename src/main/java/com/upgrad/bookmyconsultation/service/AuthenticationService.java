@@ -7,7 +7,6 @@
  */
 package com.upgrad.bookmyconsultation.service;
 
-
 import com.upgrad.bookmyconsultation.entity.User;
 import com.upgrad.bookmyconsultation.entity.UserAuthToken;
 import com.upgrad.bookmyconsultation.exception.ApplicationException;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 public class AuthenticationService {
@@ -37,12 +35,12 @@ public class AuthenticationService {
 	@Autowired
 	private UserRepository userRepository;
 
-
 	@Transactional(propagation = Propagation.REQUIRED)
 	public AuthorizedUser authenticate(final String email, final String password) throws ApplicationException {
 
 		User user = userRepository.findByEmailId(email);
-		if (user == null) throw new AuthenticationFailedException(UserErrorCode.USR_002);
+		if (user == null)
+			throw new AuthenticationFailedException(UserErrorCode.USR_002);
 
 		final String encryptedPassword = passwordCryptographyProvider.encrypt(password, user.getSalt());
 		if (!user.getPassword().equals(encryptedPassword)) {
@@ -51,7 +49,6 @@ public class AuthenticationService {
 		}
 		UserAuthToken userAuthToken = authTokenService.issueToken(user);
 		return authorizedUser(user, userAuthToken);
-
 
 	}
 

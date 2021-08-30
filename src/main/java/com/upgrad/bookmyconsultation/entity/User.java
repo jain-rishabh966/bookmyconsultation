@@ -5,38 +5,43 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-
-/**
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
+@Table(name = "user")
 public class User {
 
-	private String firstName;
-	private String lastName;
-	private String dob;
-	private String mobile;
 	@Id
+	@Column(name = "email_id", nullable = false)
 	private String emailId;
+
+	@Column(name = "first_name")
+	private String firstName;
+
+	@Column(name = "last_name")
+	private String lastName;
+
+	@Column(name = "dob")
+	private String dob;
+
+	@Column(name = "mobile")
+	private String mobile;
+
+	@Column(name = "password")
 	private String password;
+
+	@Column(name = "created_date")
 	private String createdDate;
+
+	@Column(name = "salt")
 	private String salt;
 
-}**/
-
-//Mark it with Data, Entity, Builder, NoArgsConstructor, AllArgsConstructor
-//create a class named User
-	//create firstName of type String
-	//create lastName of type String
-	//create dob of type String
-	//create mobile of type String
-	//create primary key 'emailId' of type String
-	//create password of type String
-	//create createdDate of type String
-	//create salt of type String
-	//all the mentioned members must be private
+}

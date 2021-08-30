@@ -19,12 +19,13 @@ public class TimeSlot {
 
 	public TimeSlot(String doctorId, String date) {
 
-
 		this.availableDate = date;
 		this.doctorId = doctorId;
 
-		if (StringUtils.isEmpty(date)) throw new InvalidParameterException("Date is empty");
-		if (StringUtils.isEmpty(doctorId)) throw new InvalidParameterException("doctorId is empty");
+		if (StringUtils.isEmpty(date))
+			throw new InvalidParameterException("Date is empty");
+		if (StringUtils.isEmpty(doctorId))
+			throw new InvalidParameterException("doctorId is empty");
 
 		int noOfOutput = (doctorId.hashCode() + date.hashCode()) % TimeSlotConstants.AVIAILABLE_TIME_SLOTS.size() + 1;
 
@@ -45,6 +46,5 @@ public class TimeSlot {
 		}
 		return newList;
 	}
-
 
 }

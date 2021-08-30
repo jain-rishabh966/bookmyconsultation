@@ -34,7 +34,8 @@ public class DoctorController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Doctor>> getAllDoctors(@RequestParam(value = "speciality", required = false) String speciality) {
+	public ResponseEntity<List<Doctor>> getAllDoctors(
+			@RequestParam(value = "speciality", required = false) String speciality) {
 		return ResponseEntity.ok(service.getAllDoctorsWithFilters(speciality));
 	}
 
@@ -43,25 +44,22 @@ public class DoctorController {
 		return ResponseEntity.ok(service.register(doctor));
 	}
 
-
 	@GetMapping("/speciality")
 	public ResponseEntity<List<String>> getSpeciality() {
-		return ResponseEntity.ok(Stream.of(Speciality.values())
-				.map(Enum::name)
-				.collect(Collectors.toList()));
+		return ResponseEntity.ok(Stream.of(Speciality.values()).map(Enum::name).collect(Collectors.toList()));
 	}
 
 	@GetMapping("/{doctorId}/timeSlots")
 	public ResponseEntity<TimeSlot> getTimeSlots(@RequestParam(value = "date", required = false) String date,
-	                                             @PathVariable String doctorId) {
+			@PathVariable String doctorId) {
 		if (!ValidationUtils.isValid(date)) {
 			throw new InvalidParameterException("Not a valid date");
 		}
 
-		if (service.getDoctor(doctorId) == null) throw new InvalidParameterException("Not a valid doctor id");
+		if (service.getDoctor(doctorId) == null)
+			throw new InvalidParameterException("Not a valid doctor id");
 
 		return ResponseEntity.ok(service.getTimeSlots(doctorId, date));
 	}
-
 
 }

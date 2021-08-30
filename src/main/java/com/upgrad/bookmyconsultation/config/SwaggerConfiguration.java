@@ -15,11 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
 
     @Bean
-    public Docket productsApi(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.upgrad.bookmyconsultation"))
-                .paths(PathSelectors.any())
+    public Docket productsApi() {
+        return new Docket(DocumentationType.SWAGGER_2).select()
+                .apis(RequestHandlerSelectors.basePackage("com.upgrad.bookmyconsultation")).paths(PathSelectors.any())
                 .build();
     }
 

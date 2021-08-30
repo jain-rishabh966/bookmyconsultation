@@ -1,6 +1,5 @@
 package com.upgrad.bookmyconsultation.handler;
 
-
 import com.upgrad.bookmyconsultation.controller.ext.ErrorResponse;
 import com.upgrad.bookmyconsultation.exception.ApplicationException;
 import com.upgrad.bookmyconsultation.exception.AuthenticationFailedException;
@@ -31,22 +30,26 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(AuthenticationFailedException.class)
-	public final ResponseEntity<ErrorResponse> handleAuthenticationFailedException(AuthenticationFailedException ex, WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleAuthenticationFailedException(AuthenticationFailedException ex,
+			WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), UNAUTHORIZED);
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
-	public final ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException ex, WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException ex,
+			WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), UNAUTHORIZED);
 	}
 
 	@ExceptionHandler(AuthorizationFailedException.class)
-	public final ResponseEntity<ErrorResponse> handleAuthorizationFailedException(AuthorizationFailedException ex, WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleAuthorizationFailedException(AuthorizationFailedException ex,
+			WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), FORBIDDEN);
 	}
 
 	@ExceptionHandler(EntityNotFoundException.class)
-	public final ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex,
+			WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), NOT_FOUND);
 	}
 
@@ -70,19 +73,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity(errorResponse(e), HttpStatus.BAD_REQUEST);
 	}
 
-
-	/**
 	@ExceptionHandler(SlotUnavailableException.class)
 	public ResponseEntity handleSlotUnavailableException() {
-		return ResponseEntity
-				.badRequest()
-				.body(new ErrorResponse().code("ERR_SLOT_UNAVAILABLE").message("Either the slot is already booked or not available"));
+		return ResponseEntity.badRequest().body(new ErrorResponse().code("ERR_SLOT_UNAVAILABLE")
+				.message("Either the slot is already booked or not available"));
 	}
-	**/
-	
-	//mark as ExceptionHandler for the class SlotUnavailableException
-	//create a method handleSlotUnavailableException with return type of ResponseEntity
-		//return http response for bad request with error code and a message
 
 	private ErrorResponse errorResponse(final ApplicationException exc) {
 		exc.printStackTrace();
@@ -104,7 +99,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		if (message == null) {
 			message = GenericErrorCode.GEN_001.getDefaultMessage();
 		}
-		return new ErrorResponse().code(GenericErrorCode.GEN_001.getCode()).message(message).rootCause(stringWriter.getBuffer().toString());
+		return new ErrorResponse().code(GenericErrorCode.GEN_001.getCode()).message(message)
+				.rootCause(stringWriter.getBuffer().toString());
 	}
 
 	private ErrorResponse errorResponse(final InvalidInputException invalidInputException) {
@@ -117,7 +113,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		if (message == null) {
 			message = GenericErrorCode.GEN_001.getDefaultMessage();
 		}
-		return new ErrorResponse().code(GenericErrorCode.GEN_001.getCode()).message(message).rootCause(stringWriter.getBuffer().toString());
+		return new ErrorResponse().code(GenericErrorCode.GEN_001.getCode()).message(message)
+				.rootCause(stringWriter.getBuffer().toString());
 	}
 
 }

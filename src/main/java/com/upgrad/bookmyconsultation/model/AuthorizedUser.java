@@ -29,7 +29,6 @@ public class AuthorizedUser implements Serializable {
 	private ZonedDateTime lastLoginTime;
 	private String accessToken;
 
-
 	public String getId() {
 		return id;
 	}

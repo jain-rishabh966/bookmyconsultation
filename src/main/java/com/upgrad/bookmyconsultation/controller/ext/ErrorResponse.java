@@ -2,11 +2,8 @@ package com.upgrad.bookmyconsultation.controller.ext;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
@@ -14,7 +11,7 @@ import javax.validation.constraints.*;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-02-02T16:46:24.234+05:30")
-public class ErrorResponse   {
+public class ErrorResponse {
 	@JsonProperty("code")
 	private String code = null;
 
@@ -31,11 +28,11 @@ public class ErrorResponse   {
 
 	/**
 	 * Application specific standard error code
+	 * 
 	 * @return code
 	 **/
 	@ApiModelProperty(required = true, value = "Application specific standard error code")
 	@NotNull
-
 
 	public String getCode() {
 		return code;
@@ -52,11 +49,11 @@ public class ErrorResponse   {
 
 	/**
 	 * Error message stating the reason
+	 * 
 	 * @return message
 	 **/
 	@ApiModelProperty(required = true, value = "Error message stating the reason")
 	@NotNull
-
 
 	public String getMessage() {
 		return message;
@@ -73,10 +70,10 @@ public class ErrorResponse   {
 
 	/**
 	 * Root cause of the Error
+	 * 
 	 * @return rootCause
 	 **/
 	@ApiModelProperty(value = "Root cause of the Error")
-
 
 	public String getRootCause() {
 		return rootCause;
@@ -85,7 +82,6 @@ public class ErrorResponse   {
 	public void setRootCause(String rootCause) {
 		this.rootCause = rootCause;
 	}
-
 
 	@Override
 	public boolean equals(java.lang.Object o) {
@@ -96,9 +92,8 @@ public class ErrorResponse   {
 			return false;
 		}
 		ErrorResponse errorResponse = (ErrorResponse) o;
-		return Objects.equals(this.code, errorResponse.code) &&
-				Objects.equals(this.message, errorResponse.message) &&
-				Objects.equals(this.rootCause, errorResponse.rootCause);
+		return Objects.equals(this.code, errorResponse.code) && Objects.equals(this.message, errorResponse.message)
+				&& Objects.equals(this.rootCause, errorResponse.rootCause);
 	}
 
 	@Override
@@ -129,4 +124,3 @@ public class ErrorResponse   {
 		return o.toString().replace("\n", "\n    ");
 	}
 }
-

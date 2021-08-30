@@ -29,11 +29,11 @@ public class ResponseBuilder<T> {
 		this.status = status;
 	}
 
-	public static <T> ResponseBuilder ok() {
+	public static <T> ResponseBuilder<T> ok() {
 		return new ResponseBuilder<T>(HttpStatus.OK);
 	}
 
-	public static <T> ResponseBuilder created() {
+	public static <T> ResponseBuilder<T> created() {
 		return new ResponseBuilder<T>(HttpStatus.CREATED);
 	}
 

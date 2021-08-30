@@ -1,6 +1,5 @@
 package com.upgrad.bookmyconsultation.service;
 
-
 import com.upgrad.bookmyconsultation.entity.User;
 import com.upgrad.bookmyconsultation.exception.InvalidInputException;
 import com.upgrad.bookmyconsultation.exception.ResourceUnAvailableException;
@@ -23,7 +22,6 @@ public class UserService {
 	@Autowired
 	private PasswordCryptographyProvider passwordCryptographyProvider;
 
-
 	public User register(User user) throws InvalidInputException {
 		ValidationUtils.validate(user);
 
@@ -34,17 +32,12 @@ public class UserService {
 	}
 
 	public User getUser(String id) {
-		return Optional.ofNullable(userRepository.findById(id))
-				.get()
-				.orElseThrow(ResourceUnAvailableException::new);
+		return Optional.ofNullable(userRepository.findById(id)).get().orElseThrow(ResourceUnAvailableException::new);
 	}
 
-	//create a method named getAllUsers that returns a List of type User
-		//return all the users from the database
-	/**
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
-	}**/
+	}
 
 	private void encryptPassword(final User newUser) {
 
