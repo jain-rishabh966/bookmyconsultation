@@ -48,45 +48,55 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(EntityNotFoundException.class)
-	public final ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex,
-			WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleEntityNotFoundException(
+			EntityNotFoundException ex, WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), NOT_FOUND);
 	}
 
 	@ExceptionHandler(ApplicationException.class)
-	public final ResponseEntity<ErrorResponse> handleApplicationException(ApplicationException ex, WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleApplicationException(
+			ApplicationException ex, WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), UNPROCESSABLE_ENTITY);
 	}
 
 	@ExceptionHandler(RestException.class)
-	public final ResponseEntity<ErrorResponse> handleRestException(RestException ex, WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleRestException(
+			RestException ex, WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), UNPROCESSABLE_ENTITY);
 	}
 
 	@ExceptionHandler(RuntimeException.class)
-	public final ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex, WebRequest request) {
+	public final ResponseEntity<ErrorResponse> handleRuntimeException(
+			RuntimeException ex, WebRequest request) {
 		return new ResponseEntity(errorResponse(ex), INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(InvalidInputException.class)
-	public ResponseEntity<ErrorResponse> handleInvalidInput(InvalidInputException e) {
+	public ResponseEntity<ErrorResponse> handleInvalidInput(
+			InvalidInputException e) {
 		return new ResponseEntity(errorResponse(e), HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(SlotUnavailableException.class)
 	public ResponseEntity handleSlotUnavailableException() {
-		return ResponseEntity.badRequest().body(new ErrorResponse().code("ERR_SLOT_UNAVAILABLE")
+		return ResponseEntity
+				.badRequest()
+				.body(new ErrorResponse().code("ERR_SLOT_UNAVAILABLE")
 				.message("Either the slot is already booked or not available"));
 	}
 
 	private ErrorResponse errorResponse(final ApplicationException exc) {
 		exc.printStackTrace();
-		return new ErrorResponse().code(exc.getErrorCode().getCode()).message(exc.getMessage());
+		return new ErrorResponse()
+				.code(exc.getErrorCode().getCode())
+				.message(exc.getMessage());
 	}
 
 	private ErrorResponse errorResponse(final RestException exc) {
 		exc.printStackTrace();
-		return new ErrorResponse().code(exc.getErrorCode().getCode()).message(exc.getMessage());
+		return new ErrorResponse()
+				.code(exc.getErrorCode().getCode())
+				.message(exc.getMessage());
 	}
 
 	private ErrorResponse errorResponse(final RuntimeException exc) {
@@ -99,11 +109,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		if (message == null) {
 			message = GenericErrorCode.GEN_001.getDefaultMessage();
 		}
-		return new ErrorResponse().code(GenericErrorCode.GEN_001.getCode()).message(message)
+		return new ErrorResponse()
+				.code(GenericErrorCode.GEN_001.getCode())
+				.message(message)
 				.rootCause(stringWriter.getBuffer().toString());
 	}
 
-	private ErrorResponse errorResponse(final InvalidInputException invalidInputException) {
+	private ErrorResponse errorResponse
+			(final InvalidInputException invalidInputException) {
 		invalidInputException.printStackTrace();
 
 		final StringWriter stringWriter = new StringWriter();
@@ -113,7 +126,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		if (message == null) {
 			message = GenericErrorCode.GEN_001.getDefaultMessage();
 		}
-		return new ErrorResponse().code(GenericErrorCode.GEN_001.getCode()).message(message)
+		return new ErrorResponse()
+				.code(GenericErrorCode.GEN_001.getCode())
+				.message(message)
 				.rootCause(stringWriter.getBuffer().toString());
 	}
 

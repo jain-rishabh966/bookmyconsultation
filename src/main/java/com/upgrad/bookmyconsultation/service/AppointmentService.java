@@ -26,12 +26,15 @@ public class AppointmentService {
 
 	public String appointment(Appointment appointment) throws SlotUnavailableException, InvalidInputException {
 		ValidationUtils.validate(appointment);
+
+		/* Using the spring functionality to get doctor by Doctor id and Time Slot and Appointment Date */
 		Appointment existingAppointment = appointmentRepository.findByDoctorIdAndTimeSlotAndAppointmentDate(
 				appointment.getDoctorId(), appointment.getTimeSlot(), appointment.getAppointmentDate());
 
 		if (existingAppointment != null) {
 			throw new SlotUnavailableException();
 		}
+
 		appointmentRepository.save(appointment);
 		return appointment.getAppointmentId();
 	}

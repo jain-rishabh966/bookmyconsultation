@@ -25,12 +25,20 @@ public class RatingsService {
 
 	public void submitRatings(Rating rating) {
 		rating.setId(UUID.randomUUID().toString());
+
 		ratingsRepository.save(rating);
 
-		Double avgRating = ratingsRepository.findByDoctorId(rating.getDoctorId()).stream()
+		Double avgRating = ratingsRepository
+				.findByDoctorId(rating.getDoctorId())
+				.stream()
 				.collect(Collectors.averagingInt(Rating::getRating));
-		Doctor doctor = doctorRepository.findById(rating.getDoctorId()).get();
+
+		Doctor doctor = doctorRepository
+				.findById(rating.getDoctorId())
+				.get();
+
 		doctor.setRating(avgRating);
+
 		doctorRepository.save(doctor);
 	}
 }

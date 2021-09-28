@@ -33,22 +33,30 @@ public class DoctorService {
 
 	public Doctor register(Doctor doctor) throws InvalidInputException {
 		ValidationUtils.validate(doctor);
+
 		if (doctor.getAddress() == null)
 			throw new InvalidInputException(Arrays.asList("Address"));
+
 		doctor.setId(UUID.randomUUID().toString());
+
 		if (doctor.getSpeciality() == null) {
 			doctor.setSpeciality(Speciality.GENERAL_PHYSICIAN);
 		}
+
 		Address address = doctor.getAddress();
 		address.setId(doctor.getId());
 		doctor.setAddress(addressRepository.save(address));
+
 		doctorRepository.save(doctor);
 
 		return doctor;
 	}
 
 	public Doctor getDoctor(String id) {
-		return Optional.ofNullable(doctorRepository.findById(id)).get().orElseThrow(ResourceUnAvailableException::new);
+		return Optional
+				.ofNullable(doctorRepository.findById(id))
+				.get()
+				.orElseThrow(ResourceUnAvailableException::new);
 	}
 
 	public List<Doctor> getAllDoctorsWithFilters(String speciality) {

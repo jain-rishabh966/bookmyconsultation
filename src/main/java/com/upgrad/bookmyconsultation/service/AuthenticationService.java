@@ -37,7 +37,6 @@ public class AuthenticationService {
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public AuthorizedUser authenticate(final String email, final String password) throws ApplicationException {
-
 		User user = userRepository.findByEmailId(email);
 		if (user == null)
 			throw new AuthenticationFailedException(UserErrorCode.USR_002);
@@ -49,7 +48,6 @@ public class AuthenticationService {
 		}
 		UserAuthToken userAuthToken = authTokenService.issueToken(user);
 		return authorizedUser(user, userAuthToken);
-
 	}
 
 	private AuthorizedUser authorizedUser(final User user, final UserAuthToken userAuthToken) {
